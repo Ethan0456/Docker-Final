@@ -1,0 +1,36 @@
+{
+    "os": "ubuntu:latest",
+    "dockerfile": "./Dockerfile",
+    "workdir":"/app",
+    "buildargs": {
+        "ARG1": "",
+        "ARG2": ""
+    },
+    "tag": "my-ubuntu-image:latest",
+    "name": "my-ubuntu-container",
+    "command": "/bin/bash",
+    "path": ".",
+    "ports": {
+        "80": 8080,
+        "443": 8443
+    },
+    "environment": {
+        "ENV_VAR1": "EXPORT SHELL=/bin/bash"
+    },
+    "volumes": {
+        "/host/path": {
+            "bind": "/container/path",
+            "mode": "rw"
+        }
+    },
+    "packages": [
+        "python3",
+        "python3-pip",
+        "neofetch"
+    ],
+    "libraries": [
+        "numpy",
+        "pywal",
+        "matplotlib"
+    ]
+}

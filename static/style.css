@@ -104,6 +104,24 @@ input[type="textbox"] {
   border-radius: 3px;
   padding: 5px;
 }
+#package-suggestion-box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0px 10px 0px;
+  width: 525px; /* Fixed width */
+  max-height: fit-content;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+#package-suggestion-box ul li {
+  /* max-width: 50%; */
+  overflow-x: scroll;
+  overflow-y: scroll;
+  white-space: nowrap;
+  max-width: calc(100% / 8);
+  box-sizing: border-box;
+}
 
 #library-suggestion-box {
   display: flex;

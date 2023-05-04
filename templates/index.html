@@ -78,7 +78,12 @@
             <span id="download-text" class="download-text">Here is your Personalised Docker Image Tar file.</span>
             <div class="command-container">
                 <div class="command-box">
-                  <input type="text" [value]="docker load -i {{imageName}}.tar" style="width: fit-content;" readonly>
+                    <script>
+                        function getDockerCommand() {
+                            return "docker load -i " + document.getElementById("image-name").value + ".tar"
+                        }
+                        </script>
+                  <input id="cmdBox" type="text" style="width: fit-content;" readonly>
                   <button class="copy-btn">Copy</button>
                 </input>
               </div>

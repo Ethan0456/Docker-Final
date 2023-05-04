@@ -22,9 +22,6 @@ var workdir = document.getElementById('workdir').value
 var exposeport = document.getElementById('exposeport').value
 var imagename = document.getElementById('image-name').value
 
-function getDockerCommand() {
-  return "docker load -i " + document.getElementById("image-name").value + ".tar"
-}
 
 function getImageName() {
   return imagename
@@ -99,7 +96,7 @@ function validation() {
   var imagename = document.getElementById('image-name').value
 
   if (tag == "" || workdir == "" || exposeport == "" || imagename == "" || base_image == "") {
-    alert("Enter Every Detail!")
+    alert("Please Fill Every Detail!")
     console.log(
       tag=="",
       workdir=="",

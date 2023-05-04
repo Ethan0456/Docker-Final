@@ -4,6 +4,20 @@ const libraryNames = document.getElementById("library-names");
 const librarySuggestionBox = document.getElementById('library-suggestion-box');
 const packageSuggestionBox = document.getElementById('package-suggestion-box');
 
+import "/static/js/scripts-1.js"
+
+
+function copyToClipboard(elementId) {
+  document.getElementById('command').innerHTML = getDockerCommand()
+  var aux = document.createElement("input");
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+  document.body.appendChild(aux);
+  aux.select();
+  document.execCommand("copy");
+  document.body.removeChild(aux);}
+  function log() {
+  console.log('---')
+}
 
 console.log("I am in the scripts-2.js file")
 packageNames.addEventListener('input', () => {
@@ -54,7 +68,9 @@ packageNames.addEventListener('input', () => {
 libraryNames.addEventListener('input', () => {
   if (libraryNames.value.length > 0) {
     const input = libraryNames.value.toLowerCase();
-    const matchingSuggestions = libraries_list.filter(suggestion => suggestion.toLowerCase().startsWith(input));
+    const matchingSuggestions1 = libraries_list.filter(suggestion => suggestion.toLowerCase().startsWith(input));
+    const matchingSuggestions = matchingSuggestions1.slice(0,10)
+    console.log(matchingSuggestions)
 
     if (matchingSuggestions.length > 0) {
       librarySuggestionList.innerHTML = '';
@@ -99,10 +115,13 @@ const processingBtn = document.getElementById('processing-btn');
 const processingDialog = document.getElementById('processing-dialog');
 
 processingBtn.addEventListener('click', function() {
-  processingDialog.style.display = 'block';
-  setTimeout(() => {
-    processingDialog.classList.add('active');
-  }, 100);
+  if (validation() == 0) {
+    generateJson()
+    processingDialog.style.display = 'block';
+    setTimeout(() => {
+      processingDialog.classList.add('active');
+    }, 100);
+  }
 });
 
 document.addEventListener('click', (event) => {
@@ -119,8 +138,8 @@ document.addEventListener('click', (event) => {
 
 const packages_list = [
   "neofetch",
-  "python",
-  "python-pip"
+  "python3",
+  "python3-pip"
 ]
 
 const libraries_list =[

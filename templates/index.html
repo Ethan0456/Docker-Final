@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html ng-app>
 <html>
 <head>
     <title>Docker</title>
     <link rel="stylesheet" href="../static/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.min.js"></script>
+    <script src="/static/js/angular.min.js"></script>
 </head>
 <body>
     <center>
@@ -14,7 +14,7 @@
         </div>
 
         <h2>Base Image</h2>
-        <input type="radio" id="base-ubuntu" name="base-image" value="ubuntu">
+        <input type="radio" id="base-ubuntu" name="base-image" value="ubuntu" checked>
         <label for="base-ubuntu">ubuntu</label><br>
         
         <input type="radio" id="base-debian" name="base-image" value="debian">
@@ -30,7 +30,7 @@
         <input type="textbox" id="exposeport" name="exposeport" value="8080">
 
         <h2>Image Name</h2>
-        <input type="textbox" id="image-name" name="image-name" value="new-image">
+        <input type="textbox" id="image-name" ng-model="imageName" name="image-name" value="new-image" placeholder="Enter Image Name">
         
         <h2>Enter Custom Packages Names</h2>
 
@@ -56,7 +56,8 @@
         </div>
         
         <center>
-            <button id="processing-btn" type="generateImage" onclick="generateJson()">Generate Image</button>
+            <!-- <button id="processing-btn" type="generateImage" onclick="generateJson()">Generate Image</button> -->
+            <button id="processing-btn" type="generateImage">Generate Image</button>
         </center>
 
     </div>
@@ -64,23 +65,28 @@
     <div id="processing-dialog" class="dialog">
         <div class="dialog-content">
             <div class="progress-circle">
-                <svg class="progress" viewBox="0 0 100 100">
+                <!-- <svg class="progress" viewBox="0 0 100 100">
                     <circle class="progress-background" cx="50" cy="50" r="45"></circle>
                     <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
-                </svg>
+                </svg> -->
             </div>
             <span class="progress-text">Wait till your Image is being generated...</span>
         </div>
     </div>
     <div id="download-dialog" class="dialog">
-        <span id="download-text" class="download-text">Here is your Personalised Docker Image Tar file.</span>
         <div class="dialog-content">
+            <span id="download-text" class="download-text">Here is your Personalised Docker Image Tar file.</span>
+            <div class="command-container">
+                <div class="command-box">
+                  <input type="text" [value]="docker load -i {{imageName}}.tar" style="width: fit-content;" readonly>
+                  <button class="copy-btn">Copy</button>
+                </input>
+              </div>
             <button id="download-btn" type="downloadBtn" onclick="downloadFile()">Download</button>
         </div>
     </div>
-    <script src="../static/js/jquery.js" }></script>
-    <script type="module" src="../static/js/scripts.js"></script>
-    <script src="../static/js/scripts-1.js"}></script>
-    <script type="module" src="../static/js/scripts-2.js"}></script>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/scripts-1.js"></script>
+    <script type="module" src="../static/js/scripts-2.js"></script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 export const packages = [
     "neofetch",
-    "python",
-    "python-pip"
+    "python3",
+    "python3-pip"
 ]

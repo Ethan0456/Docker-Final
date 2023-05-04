@@ -53,7 +53,7 @@ def check_file_status(filename):
 
 @app.route('/download/<filename>')
 def download_file(filename):
-    path = '../' + filename
+    path = filename
     return send_file(path, mimetype='application/tar', download_name = filename+'.tar')
 
 if __name__=="__main__":

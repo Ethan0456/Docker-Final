@@ -12,6 +12,24 @@ const selectedPackages = document.getElementById('selected-packages-box');
 const selectedPackagesList = document.getElementById('selected-packages');
 const selectedPackagesArray = Array.from(selectedPackagesList.children);
 
+var base_image = document.getElementById('base-ubuntu').checked ? 'ubuntu:latest' : 'debian:latest'
+
+// var libraries_checkbox_list = document.querySelectorAll('input[name="libraries"]:checked')
+// var packages_checkbox_list = document.querySelectorAll('input[name="packages"]:checked')
+
+var tag = document.getElementById('tag').value
+var workdir = document.getElementById('workdir').value
+var exposeport = document.getElementById('exposeport').value
+var imagename = document.getElementById('image-name').value
+
+function getDockerCommand() {
+  return "docker load -i " + document.getElementById("image-name").value + ".tar"
+}
+
+function getImageName() {
+  return imagename
+}
+
 const selected_libraries_list = []
 const selected_packages_list = []
 
@@ -37,10 +55,6 @@ function removeItemFromHtmlList(list, itemText) {
 
 function generateJson() {
 
-  var base_image = document.getElementById('base-ubuntu').checked ? 'ubuntu:latest' : 'debian:latest'
-
-  // var libraries_checkbox_list = document.querySelectorAll('input[name="libraries"]:checked')
-  // var packages_checkbox_list = document.querySelectorAll('input[name="packages"]:checked')
 
   var tag = document.getElementById('tag').value
   var workdir = document.getElementById('workdir').value
@@ -57,22 +71,45 @@ function generateJson() {
   //   selected_packages_list.push(checkbox.value)
   // })
 
-  console.log("packages = ", selected_packages_list)
-  console.log("libraries = ", selected_libraries_list)
+  if (validation() == 0) {
+    console.log("packages = ", selected_packages_list)
+    console.log("libraries = ", selected_libraries_list)
 
-  // Create JSON object
-  var jsonObject = {
-    "os": base_image,
-    "tag": tag + ":latest",
-    "workdir": workdir,
-    "exposeport": exposeport,
-    "image-name": imagename,
-    "packages": selected_packages_list,
-    "libraries": selected_libraries_list 
+    // Create JSON object
+    var jsonObject = {
+      "os": base_image,
+      "tag": tag + ":latest",
+      "workdir": workdir,
+      "exposeport": exposeport,
+      "image-name": imagename,
+      "packages": selected_packages_list,
+      "libraries": selected_libraries_list 
+    }
+
+    console.log(jsonObject)
+    sendJsonToBackEnd(jsonObject, imagename)
+
   }
+}
 
-  console.log(jsonObject)
-  sendJsonToBackEnd(jsonObject, imagename)
+function validation() {
+  var tag = document.getElementById('tag').value
+  var workdir = document.getElementById('workdir').value
+  var exposeport = document.getElementById('exposeport').value
+  var imagename = document.getElementById('image-name').value
+
+  if (tag == "" || workdir == "" || exposeport == "" || imagename == "" || base_image == "") {
+    alert("Enter Every Detail!")
+    console.log(
+      tag=="",
+      workdir=="",
+      exposeport=="",
+      base_image=="",
+      imagename==""
+    )
+    return 1
+  }
+  return 0
 }
 
 
@@ -160,3 +197,11 @@ function checkFileStatus(fileId, checkInterval) {
     }
   });
 }
+
+const copyBtn = document.querySelector('.copy-btn');
+const commandBox = document.querySelector('.command-box input');
+
+copyBtn.addEventListener('click', () => {
+  commandBox.select();
+  document.execCommand('copy');
+});

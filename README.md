@@ -1,14 +1,14 @@
 # Introduction
 ---
 
-##A Docker Project which makes creating Docker Containers easy using a User-Friendly Web Interface.
+A Docker Project which makes creating Docker Containers easy using a User-Friendly Web Interface.
 
 # How its useful:
 ---
 
-> Goto tool to create Python Environments.
-> Goto tool for creating containers for Non techie people.
-> Saves time from the hassle of making a docker container.
+* Goto tool to create Python Environments.
+* Goto tool for creating containers for Non techie people.
+* Saves time from the hassle of making a docker container.
 
 # Screenshots
 ---
